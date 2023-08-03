@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+import { LuTimer, LuTimerReset, LuTimerOff } from 'react-icons/lu'
+
 const Timer = () => {
 	const [time, setTime] = useState<number>(1500)
 	const [started, setStarted] = useState<boolean>(false)
@@ -15,7 +17,7 @@ const Timer = () => {
 		}
 	}, [started])
 
-	// Formatting time from a number
+	// Formatting time
 	const formatTime = (time: number): string => {
 		const minutes = Math.floor(time / 60)
 		const seconds = time % 60
@@ -35,18 +37,24 @@ const Timer = () => {
 	}
 
   return (
-    <div>
-      <h1>🍅</h1>
-			<p>{formatTime(time)}</p>
-			<button onClick={handleStart}>
-				Start
-			</button>
-			<button onClick={handleStop}>
-				Stop
-			</button>
-			<button onClick={handleReset}>
-				Reset
-			</button>
+    <div className="h-screen flex items-center justify-center flex-col bg-slate-900">
+			<p className="time text-8xl">
+				{formatTime(time)}
+			</p>
+			<div className="flex flex-row m-1">
+				<button className="utility-btn hover:bg-slate-800"
+					onClick={handleStart}>
+					<LuTimer color="white" className="w-10 h-10" />
+				</button>
+				<button className="utility-btn hover:bg-slate-800"
+					onClick={handleStop}>
+					<LuTimerOff color="white" className="w-10 h-10" />
+				</button>
+				<button className="utility-btn hover:bg-slate-800"
+					onClick={handleReset}>
+					<LuTimerReset color="white" className="w-10 h-10" />
+				</button>
+			</div>
     </div>
   )
 }
