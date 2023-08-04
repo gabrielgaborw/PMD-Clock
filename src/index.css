@@ -9,10 +9,19 @@
   .utility-btn {
     @apply flex flex-row items-center justify-center 
           w-14 h-14 m-8 rounded-full shadow-md
-          transition-all;
+          transition-all hover:bg-slate-800;
   }
   .time {
     @apply text-white;
     font-family: 'Roboto Slab', serif;
+  }
+  .title {
+    @apply text-white text-3xl;
+    font-family: 'Roboto Slab', serif;
+  }
+  .nav-btn {
+    @apply flex flex-row items-center justify-center 
+          w-10 h-10 m-0 mx-2 rounded-full shadow-md
+          transition-all hover:bg-slate-500;
   }
 }

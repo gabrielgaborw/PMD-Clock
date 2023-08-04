@@ -1,24 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { FaScrewdriverWrench, FaRegCircleQuestion } from 'react-icons/fa6'
 import { BsSun, BsMoon } from 'react-icons/bs'
 
 const Navbar = () => {
+	const [darkMode, setDarkMode] = useState<boolean>(true);
+
+	const handleModeToggle = () => {
+		setDarkMode((prevMode) => !prevMode)		
+	}
+
 	return (
-    <div className="h-14 flex items-center justify-end flex-row bg-slate-800">
-			<h1 className="float-left">
+    <div className="h-14 flex items-center justify-between flex-row bg-slate-800">
+			<h1 className="title">
 				🍅Pomodoro Clock
 			</h1>
-			<button>
-				<FaRegCircleQuestion className="" />
-			</button>
-			<button>
-				<FaScrewdriverWrench className="" />
-			</button>
-			<button>
-				<BsSun className="" />
-				<BsMoon className="" />
-			</button>
+			<div className="flex flex-row items-center justify-center">
+				{/* TODO: implement an about page that pops up */}
+				<button className="nav-btn">
+					<FaRegCircleQuestion color="white" className="w-6 h-6" />
+				</button>
+				{/* TODO: make a setting menu */}
+				<button className="nav-btn">
+					<FaScrewdriverWrench color="white" className="w-6 h-6" />
+				</button>
+				{/* TODO: implement dark mode */}
+				<button className="nav-btn"
+					onClick={handleModeToggle}>
+					{darkMode ? 
+						<BsSun color="white" className="w-6 h-6" />
+					: <BsMoon className="w-6 h-6" />
+					}
+				</button>
+			</div>
 		</div>
   )
 }
