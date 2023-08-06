@@ -41,22 +41,42 @@ const Timer = () => {
   return (
     <div className="h-screen flex items-center justify-center flex-col bg-slate-900">
 			{/* TODO: maybe make an hourglass spin next to time */}
-			<p className="flex flex-row time text-8xl">
-				<LiaHourglassStartSolid />
-				{formatTime(time)}
+			<p className="flex flex-row text-8xl">
+				{!started ? 
+					<LiaHourglassStartSolid color="white" />
+					: <LiaHourglassHalfSolid color="white" />
+				}
+				<span className="time">
+					{formatTime(time)}
+				</span>
+				<button className="relative utility-btn group">
+					<GiCoffeeCup color="white" className="w-10 h-10" />
+					<span className="tooltip group-hover:scale-100 top-14">
+						Break
+					</span>
+				</button>
 			</p>
 			<div className="flex flex-row m-1">
-				<button className="utility-btn"
+				<button className="relative utility-btn group"
 					onClick={handleStart}>
 					<LuTimer color="white" className="w-10 h-10" />
+					<span className="tooltip group-hover:scale-100 top-14">
+						Start
+					</span>
 				</button>
-				<button className="utility-btn"
+				<button className="relative utility-btn group"
 					onClick={handleStop}>
 					<LuTimerOff color="white" className="w-10 h-10" />
+					<span className="tooltip group-hover:scale-100 top-14">
+						Stop
+					</span>
 				</button>
-				<button className="utility-btn"
+				<button className="relative utility-btn group"
 					onClick={handleReset}>
 					<LuTimerReset color="white" className="w-10 h-10" />
+					<span className="tooltip group-hover:scale-100 top-14">
+						Reset
+					</span>
 				</button>
 			</div>
     </div>
