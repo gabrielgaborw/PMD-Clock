@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 
 import { LuTimer, LuTimerReset, LuTimerOff } from 'react-icons/lu'
 import { GiCoffeeCup } from 'react-icons/gi'
 import { LiaHourglassStartSolid, LiaHourglassHalfSolid, LiaHourglassEndSolid } from 'react-icons/lia'
 
+import { SettingsContext } from '../context/SettingsContext'
+
 const Timer = () => {
 	const [time, setTime] = useState<number>(1500)
 	const [started, setStarted] = useState<boolean>(false)
+	const { settings, setAuto, setPomodoroTime, setBreakTime } = useContext(SettingsContext)
+	setAuto(false);
+	console.log(settings);
 
 	// Making the time pass if started is true
 	useEffect(() => {
