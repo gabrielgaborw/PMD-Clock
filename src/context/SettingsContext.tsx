@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react'
+import { useLocalStorage } from 'usehooks-ts';
 
 interface SettingsContextType {
 	settings: Settings;
@@ -16,8 +17,8 @@ interface Settings {
 const defaultValue: SettingsContextType = {
 	settings: {
 		auto: true,
-		pomodoroTime: 1500,
-		breakTime: 300,
+		pomodoroTime: 25,
+		breakTime: 5,
 	},
 	setAuto: () => {},
 	setPomodoroTime: () => {},
@@ -27,9 +28,9 @@ const defaultValue: SettingsContextType = {
 export const SettingsContext = createContext<SettingsContextType>(defaultValue)
 
 export const SettingsProvider = (props: { children: React.ReactNode } ) => {
-	const [auto, setAuto] = useState<boolean>(defaultValue.settings.auto)
-	const [pomodoroTime, setPomodoroTime] = useState<number>(defaultValue.settings.pomodoroTime)
-	const [breakTime, setBreakTime] = useState<number>(defaultValue.settings.breakTime)
+	const [auto, setAuto] = useLocalStorage<boolean>('auto', defaultValue.settings.auto)
+	const [pomodoroTime, setPomodoroTime] = useLocalStorage<number>('pmd-time', defaultValue.settings.pomodoroTime)
+	const [breakTime, setBreakTime] = useLocalStorage<number>('break-time', defaultValue.settings.breakTime)
 
 	const settings: Settings = {
 		auto,

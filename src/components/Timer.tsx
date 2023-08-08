@@ -7,11 +7,11 @@ import { LiaHourglassStartSolid, LiaHourglassHalfSolid, LiaHourglassEndSolid } f
 import { SettingsContext } from '../context/SettingsContext'
 
 const Timer = () => {
-	const [time, setTime] = useState<number>(1500)
+	const { settings } = useContext(SettingsContext)
+	const [time, setTime] = useState<number>(settings.pomodoroTime * 60)
+	const [breakTime, setBreakTime] = useState<number>(settings.breakTime)
+	const [autoMode, setAutoMode] = useState<boolean>(settings.auto)
 	const [started, setStarted] = useState<boolean>(false)
-	const { settings, setAuto, setPomodoroTime, setBreakTime } = useContext(SettingsContext)
-	setAuto(false);
-	console.log(settings);
 
 	// Making the time pass if started is true
 	useEffect(() => {
@@ -23,6 +23,11 @@ const Timer = () => {
 			return () => clearInterval(interval)
 		}
 	}, [started])
+
+	// Updating state if settings changed
+	useEffect(() => {
+		setTime(settings.pomodoroTime * 60)
+	}, [settings.pomodoroTime])
 
 	// Formatting time
 	const formatTime = (time: number): string => {
@@ -39,14 +44,14 @@ const Timer = () => {
 		setStarted(false)
 	}
 	const handleReset = () => {
-		setTime(1500)
+		setTime(settings.pomodoroTime * 60)
 		setStarted(false)
 	}
 
   return (
     <div className="h-screen flex items-center justify-center flex-col bg-slate-900">
 			{/* TODO: maybe make an hourglass spin next to time */}
-			<p className="flex flex-row text-8xl">
+			<p className="relative flex flex-row items-center text-8xl">
 				{!started ? 
 					<LiaHourglassStartSolid color="white" />
 					: <LiaHourglassHalfSolid color="white" />
@@ -54,7 +59,7 @@ const Timer = () => {
 				<span className="time">
 					{formatTime(time)}
 				</span>
-				<button className="relative utility-btn group">
+				<button className="absolute left-[300px] utility-btn group">
 					<GiCoffeeCup color="white" className="w-10 h-10" />
 					<span className="tooltip group-hover:scale-100 top-14">
 						Break
