@@ -4,7 +4,7 @@ import { IoCloseSharp } from 'react-icons/io5'
 
 const About = (props: { visibility: boolean, setVisibility: React.Dispatch<React.SetStateAction<boolean>>}) => {
 	const { visibility, setVisibility } = props
-
+	
   return visibility ? (
     <div className="popup-background">
 			<div className="popup-content">

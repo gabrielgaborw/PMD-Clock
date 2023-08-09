@@ -22,7 +22,7 @@ const Navbar = () => {
 	const handleShowSettings = () => {
 		setVisibleSettings(true);
 	}
-
+	
 	return (
     <div className="h-14 flex items-center justify-between flex-row bg-slate-800">
 			<h1 className="title">
