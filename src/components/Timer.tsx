@@ -15,6 +15,7 @@ const Timer = () => {
 	const [autoMode, setAutoMode] = useState<boolean>(settings.auto)
 	const [started, setStarted] = useState<boolean>(false)
 	const [breakStarted, setBreakStarted] = useState<boolean>(false)
+	// TODO: Add sound effects
 
 	// Making the time pass if started is true
 	useEffect(() => {
@@ -26,12 +27,14 @@ const Timer = () => {
 			}, 1000)
 			if(time === 0) {
 				setStarted((prevStarted) => !prevStarted)
-				if(autoMode) {
-					setTime(settings.breakTime * 60)
-					setBreakStarted((prevBreak) => !prevBreak)
-				}
+				setTime(0)
+				setTimeout(() => {
+					if(autoMode) {
+						setTime(settings.breakTime * 60)
+						setBreakStarted((prevBreak) => !prevBreak)
+					}
+				}, 5000);
 			}
-
 			return () => clearInterval(interval)
 		}
 
@@ -43,12 +46,14 @@ const Timer = () => {
 			}, 1000)
 			if(autoMode && time === 0) {
 				setBreakStarted((prevBreak) => !prevBreak)
-				if(autoMode) {
-					setTime(settings.pomodoroTime * 60)
-					setStarted((prevStarted) => !prevStarted)
-				}
+				setTime(0)
+				setTimeout(() => {
+					if(autoMode) {
+						setTime(settings.pomodoroTime * 60)
+						setStarted((prevStarted) => !prevStarted)
+					}
+				}, 5000);
 			}
-
 			return () => clearInterval(interval)
 		}
 	}, [started, breakStarted, time, autoMode])
