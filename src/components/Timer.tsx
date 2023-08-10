@@ -1,11 +1,17 @@
 import React, { useEffect, useState, useContext } from 'react'
 
+import useSound from 'use-sound'
+
 import { LuTimer, LuTimerReset, LuTimerOff } from 'react-icons/lu'
 import { GiCoffeeCup } from 'react-icons/gi'
 import { LiaHourglassStartSolid, LiaHourglassHalfSolid, LiaHourglassEndSolid } from 'react-icons/lia'
 import { BiTimer } from 'react-icons/bi'
 
 import { SettingsContext } from '../context/SettingsContext'
+
+// WIP
+// import startSound from "../Sounds/Start.mp3"
+// import "../Sounds/Alarm.mp3"
 
 const Timer = () => {
 	const { settings } = useContext(SettingsContext)
@@ -16,6 +22,7 @@ const Timer = () => {
 	const [started, setStarted] = useState<boolean>(false)
 	const [breakStarted, setBreakStarted] = useState<boolean>(false)
 	// TODO: Add sound effects
+	// const [play] = useSound(startSound)
 
 	// Making the time pass if started is true
 	useEffect(() => {

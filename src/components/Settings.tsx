@@ -54,14 +54,14 @@ const Settings = (props: { visibility: boolean, setVisibility: React.Dispatch<Re
 							<MdOutlineCheckBox />
 							: <MdOutlineCheckBoxOutlineBlank />
 						}
-						<span className="ml-6">Auto Mode</span>
+						<span className="ml-4">Auto Mode</span>
 					</button>
 					<div className="mt-8 flex justify-between flex-row">
 						<div className="flex flex-col">
 							<p>Pomodoro time (in minutes)</p>
 							<input
 								type="number"
-								value={pmdInput}
+								value={pmdInput !== 0 ? pmdInput : ''}
 								className="w-52 px-5 py-2 bg-transparent border-2 outline-none border-zinc-600 rounded-xl placeholder:text-zinc-500 focus:border-white"
 								onChange={handlePmdTimeChange}
 							/>
@@ -70,13 +70,16 @@ const Settings = (props: { visibility: boolean, setVisibility: React.Dispatch<Re
 							<p>Break time (in minutes)</p>
 							<input
 								type="number"
-								value={breakInput}
+								value={breakInput !== 0 ? breakInput : ''}
 								className="w-52 px-5 py-2 bg-transparent border-2 outline-none border-zinc-600 rounded-xl placeholder:text-zinc-500 focus:border-white"
 								onChange={handleBreakTimeChange}
 							/>
 						</div>
 					</div>
-					<button type="submit">Submit</button>
+					<button type="submit" className="submit-btn group overflow-hidden">
+						<span className="absolute bg-slate-800 w-60 h-20 left-0 top-10 group-hover:top-0 ease-out duration-300"></span>
+						<span className="relative">Save & Close</span>
+					</button>
 				</div>
 			</div>
 		</form>
