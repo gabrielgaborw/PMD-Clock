@@ -41,6 +41,14 @@
           text-white;
     font-family: 'Roboto Slab', serif;
   }
+  .input-valid {
+    @apply w-52 px-5 py-2 bg-transparent border-2 outline-none border-zinc-600 rounded-xl 
+    placeholder:text-zinc-500 focus:border-white
+  }
+  .input-invalid {
+    @apply w-52 px-5 py-2 bg-transparent border-2 outline-none border-red-500 rounded-xl 
+    placeholder:text-zinc-500 focus:border-red-600
+  }
   .submit-btn {
     @apply relative w-36 h-10 mt-6
     bg-white shadow-md 

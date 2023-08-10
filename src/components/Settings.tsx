@@ -2,20 +2,26 @@ import React, { useState, useContext } from 'react'
 
 import { IoCloseSharp } from 'react-icons/io5'
 import { MdOutlineCheckBoxOutlineBlank, MdOutlineCheckBox } from 'react-icons/md'
+import { ImWarning } from 'react-icons/im'
 
 import { SettingsContext } from '../context/SettingsContext'
 
 const Settings = (props: { visibility: boolean, setVisibility: React.Dispatch<React.SetStateAction<boolean>>}) => {
 	const { visibility, setVisibility } = props
 	const { settings, setAuto, setPomodoroTime, setBreakTime } = useContext(SettingsContext)
+
 	const [autoMode, setAutoMode] = useState<boolean>(settings.auto)
-	const [pmdInput, setPmdInput] = useState<number>(settings.pomodoroTime)
+	const [pmdInput, setPmdInput] = useState<number | string>(settings.pomodoroTime)
 	const [breakInput, setBreakInput] = useState<number>(settings.breakTime)
+
+	const [validatePmd, setValidatePmd] = useState<boolean>(true)
+	const [validateBreak, setValidateBreak] = useState<boolean>(true)
+
 	// TODO: KEYBINDS
 	// Start or stop timer
-	const [ssTime, setSSTime] = useState("")
+	const [timeControlKey, setTimeControlKey] = useState("")
 	// Reset timer
-	const [reset, setReset] = useState("")
+	const [resetKey, setResetKey] = useState("")
 	// Break key
 	const [breakKey, setBreakKey] = useState("")
 
@@ -25,20 +31,41 @@ const Settings = (props: { visibility: boolean, setVisibility: React.Dispatch<Re
 
 	const handleBreakTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const newTime = Number(e.target.value)
+
 		setBreakInput(newTime)
+
+		if(newTime === 0) setValidateBreak(false)
+		else {
+			if(newTime > 0 && newTime <= 60 ) setValidateBreak(true)
+			else {
+				setValidateBreak(false)
+			}
+		}
 	}
 
 	const handlePmdTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const newTime = Number(e.target.value)
+
 		setPmdInput(newTime)
+
+		if(newTime === 0) setValidatePmd(false)
+		else {
+			if(newTime > 0 && newTime <= 60 ) setValidatePmd(true)
+			else {
+				setValidatePmd(false)
+			}
+		}
 	}
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
-		setAuto(autoMode)
-		setPomodoroTime(pmdInput)
-		setBreakTime(breakInput)
-		setVisibility(false);
+		if(validatePmd && validateBreak) {
+			setAuto(autoMode)
+			setPomodoroTime(Number(pmdInput))
+			setBreakTime(breakInput)
+
+			setVisibility(false);
+		}
 	}
 
   return visibility ? (
@@ -62,7 +89,7 @@ const Settings = (props: { visibility: boolean, setVisibility: React.Dispatch<Re
 							<input
 								type="number"
 								value={pmdInput !== 0 ? pmdInput : ''}
-								className="w-52 px-5 py-2 bg-transparent border-2 outline-none border-zinc-600 rounded-xl placeholder:text-zinc-500 focus:border-white"
+								className={validatePmd ? "input-valid" : "input-invalid"}
 								onChange={handlePmdTimeChange}
 							/>
 						</div>
@@ -71,11 +98,23 @@ const Settings = (props: { visibility: boolean, setVisibility: React.Dispatch<Re
 							<input
 								type="number"
 								value={breakInput !== 0 ? breakInput : ''}
-								className="w-52 px-5 py-2 bg-transparent border-2 outline-none border-zinc-600 rounded-xl placeholder:text-zinc-500 focus:border-white"
+								className={validateBreak ? "input-valid" : "input-invalid"}
 								onChange={handleBreakTimeChange}
 							/>
 						</div>
 					</div>
+					{!validatePmd ? 
+						<p className="flex items-center justify-center mt-4">
+							<ImWarning color="red" />
+							<span className="ml-4 text-red-500">Pomodoro time must be between 1 and 60 minutes</span>
+						</p> : ""
+					}
+					{!validateBreak ? 
+						<p className="flex items-center justify-center mt-4">
+							<ImWarning color="red" />
+							<span className="ml-4 text-red-500">Break time must be between 1 and 60 minutes</span>
+						</p> : ""
+					}
 					<button type="submit" className="submit-btn group overflow-hidden">
 						<span className="absolute bg-slate-800 w-60 h-20 left-0 top-10 group-hover:top-0 ease-out duration-300"></span>
 						<span className="relative">Save & Close</span>
