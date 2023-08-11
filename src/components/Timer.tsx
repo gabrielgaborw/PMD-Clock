@@ -21,8 +21,13 @@ const Timer = () => {
 	const [autoMode, setAutoMode] = useState<boolean>(settings.auto)
 	const [started, setStarted] = useState<boolean>(false)
 	const [breakStarted, setBreakStarted] = useState<boolean>(false)
+	const userTheme = localStorage.getItem("theme")
 	// TODO: Add sound effects
 	// const [play] = useSound(startSound)
+
+	useEffect(() => {
+		
+	}, [userTheme])
 
 	// Making the time pass if started is true
 	useEffect(() => {
@@ -112,25 +117,25 @@ const Timer = () => {
 	}
 
   return (
-    <div className="h-screen flex items-center justify-center flex-col bg-slate-900">
+    <div className="h-[90vh] flex items-center justify-center flex-col dark:bg-slate-900 bg-slate-50">
 			{/* TODO: maybe make an hourglass spin next to time */}
 			<p className="relative flex flex-row items-center text-8xl">
 				{started || breakStarted ? 
-					<LiaHourglassHalfSolid color="white" className="" />
-					: <LiaHourglassStartSolid color="white" className="" />
+					<LiaHourglassHalfSolid className="dark:text-white text-black" />
+					: <LiaHourglassStartSolid className="dark:text-white text-black" />
 				}
 				<span className="time">
 					{formatTime(time)}
 				</span>
 				<button className="absolute left-[200px] bottom-16 utility-btn group" onClick={handleBreak}>
-					<GiCoffeeCup color="white" className="w-10 h-10" />
-					<span className="tooltip group-hover:scale-100 top-14">
+					<GiCoffeeCup className="w-10 h-10 dark:text-white text-black" />
+					<span className="tooltip group-hover:scale-100">
 						Break
 					</span>
 				</button>
 				<button className="absolute left-[20px] bottom-16 utility-btn group" onClick={handlePmd}>
-					<BiTimer color="white" className="w-10 h-10" />
-					<span className="tooltip group-hover:scale-100 top-14">
+					<BiTimer className="w-10 h-10 dark:text-white text-black" />
+					<span className="tooltip group-hover:scale-100">
 						Pomodoro
 					</span>
 				</button>
@@ -138,22 +143,22 @@ const Timer = () => {
 			<div className="flex flex-row m-1">
 				<button className="relative utility-btn group"
 					onClick={handleStart}>
-					<LuTimer color="white" className="w-10 h-10" />
-					<span className="tooltip group-hover:scale-100 top-14">
+					<LuTimer className="w-10 h-10 dark:text-white text-black" />
+					<span className="tooltip group-hover:scale-100">
 						Start
 					</span>
 				</button>
 				<button className="relative utility-btn group"
 					onClick={handleStop}>
-					<LuTimerOff color="white" className="w-10 h-10" />
-					<span className="tooltip group-hover:scale-100 top-14">
+					<LuTimerOff className="w-10 h-10 dark:text-white text-black" />
+					<span className="tooltip group-hover:scale-100">
 						Stop
 					</span>
 				</button>
 				<button className="relative utility-btn group"
 					onClick={handleReset}>
-					<LuTimerReset color="white" className="w-10 h-10" />
-					<span className="tooltip group-hover:scale-100 top-14">
+					<LuTimerReset className="w-10 h-10 dark:text-white text-black" />
+					<span className="tooltip group-hover:scale-100">
 						Reset
 					</span>
 				</button>

@@ -9,11 +9,11 @@
 @layer components {
   .utility-btn {
     @apply flex flex-row items-center justify-center 
-          w-14 h-14 m-8 rounded-full shadow-md
-          transition-all hover:bg-slate-800;
+          w-14 h-14 m-8 rounded-full shadow-sm
+          transition-all dark:hover:bg-slate-800 hover:bg-gray-200;
   }
   .time {
-    @apply text-white;
+    @apply dark:text-white text-black;
     font-family: 'Roboto Slab', serif;
   }
   .title {
@@ -22,13 +22,13 @@
   }
   .nav-btn {
     @apply flex flex-row items-center justify-center 
-          w-10 h-10 m-0 mx-2 rounded-full shadow-md
-          transition-all duration-100 hover:bg-slate-500;
+          w-10 h-10 m-0 mx-2 rounded-full shadow-sm
+          transition-all duration-100 dark:hover:bg-slate-700 hover:bg-gray-300;
   }
   .tooltip {
-    @apply absolute w-auto p-2 m-2 min-w-max top-12
+    @apply absolute w-auto p-2 m-2 min-w-max mt-28
           rounded-md shadow-md
-          text-white bg-slate-700
+          text-white dark:bg-slate-700 bg-gray-400
           text-xs font-bold
           transition-all duration-100 scale-0 origin-top;
   }

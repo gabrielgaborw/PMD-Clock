@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react'
 import { IoCloseSharp } from 'react-icons/io5'
 import { MdOutlineCheckBoxOutlineBlank, MdOutlineCheckBox } from 'react-icons/md'
 import { ImWarning } from 'react-icons/im'
+import { AiFillQuestionCircle } from 'react-icons/ai'
 
 import { SettingsContext } from '../context/SettingsContext'
 
@@ -83,6 +84,12 @@ const Settings = (props: { visibility: boolean, setVisibility: React.Dispatch<Re
 						}
 						<span className="ml-4">Auto Mode</span>
 					</button>
+					{/* <button className="group">
+						<AiFillQuestionCircle className="ml-2" />
+						<span className="tooltip group-hover:scale-100">
+							Enabling this will make it so you don't have to manually click to take a break or to start a work session
+						</span>
+					</button> */}
 					<div className="mt-8 flex justify-between flex-row">
 						<div className="flex flex-col">
 							<p>Pomodoro time (in minutes)</p>
